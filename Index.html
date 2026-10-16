@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Knowledge Journal | Read, Learn, Grow</title>
+
+    <meta name="description"
+          content="A personal writer's blog and educational platform featuring reflections, original quotes, study notes, Meghalaya GK, and competitive examination resources.">
+
+    <style>
+        /* ===== GENERAL STYLES ===== */
+
+        :root {
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --muted: #64748b;
+            --primary: #1d4ed8;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark {
+            --background: #0f172a;
+            --surface: #1e293b;
+            --text: #f1f5f9;
+            --muted: #cbd5e1;
+            --primary: #93c5fd;
+            --border: #334155;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .container {
+            width: min(1100px, 92%);
+            margin: auto;
+        }
+
+        .section {
+            padding: 65px 0;
+        }
+
+        .section-title {
+            font-family: Georgia, serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 10px;
+        }
+
+        .section-description {
+            color: var(--muted);
+            margin-bottom: 30px;
+        }
+
+        /* ===== NAVIGATION ===== */
+
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            min-height: 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-family: Georgia, serif;
+            font-size: 1.35rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .theme-button,
+        .menu-button {
+            background: var(--background);
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+        }
+
+        .menu-button {
+            display: none;
+        }
+
+        /* ===== HERO SECTION ===== */
+
+        .hero {
+            padding: 90px 0;
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(59, 130, 246, 0.12),
+                    transparent 45%
+                );
+        }
+
+        .hero-content {
+            max-width: 780px;
+        }
+
+        .eyebrow {
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .hero h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            line-height: 1.12;
+            margin: 18px 0;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            max-width: 650px;
+            color: var(--muted);
+            font-size: 1.1rem;
+            margin-bottom: 28px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 8px;
+            background: var(--primary);
+            color: white;
+            font-weight: bold;
+            border: none;
+        }
+
+        body.dark .button {
+            color: #0f172a;
+        }
+
+        .button.secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            margin-left: 8px;
+        }
+
+        /* ===== SEARCH ===== */
+
+        .search-area {
+            margin-top: 28px;
+            max-width: 600px;
+        }
+
+        .search-area input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: var(--surface);
+            color: var(--text);
+            outline-color: var(--primary);
+        }
+
+        #search-message {
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        /* ===== CONTENT CARDS ===== */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 25px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-category {
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .card h3 {
+            font-family: Georgia, serif;
+            font-size: 1.35rem;
+            line-height: 1.4;
+            margin: 12px 0;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+        }
+
+        .read-more {
+            color: var(--primary);
+            font-weight: bold;
+            background: none;
+            border: none;
+            text-align: left;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .empty-message {
+            display: none;
+            color: var(--muted);
+            padding: 25px 0;
+        }
+
+        /* ===== QUOTE ===== */
+
+        .quote-section {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        blockquote {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            font-family: Georgia, serif;
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            line-height: 1.5;
+        }
+
+        .quote-author {
+            display: block;
+            margin-top: 18px;
+            font-family: Arial, sans-serif;
+            font-size: 0.95rem;
+            color: var(--muted);
+        }
+
+        /* ===== ABOUT ===== */
+
+        .about-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 32px;
+            max-width: 800px;
+        }
+
+        .about-box p {
+            color: var(--muted);
+            margin-top: 14px;
+        }
+
+        /* ===== FOOTER ===== */
+
+        footer {
+            padding: 30px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        footer p + p {
+            margin-top: 5px;
+        }
+
+        /* ===== ARTICLE READER ===== */
+
+        .reader {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: var(--background);
+            overflow-y: auto;
+        }
+
+        .reader-content {
+            max-width: 760px;
+            width: 90%;
+            margin: 0 auto;
+            padding: 35px 0 70px;
+        }
+
+        .close-reader {
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .reader h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            line-height: 1.2;
+            margin: 16px 0;
+        }
+
+        .reader-meta {
+            color: var(--muted);
+            margin-bottom: 28px;
+        }
+
+        .reader-body p {
+            margin: 18px 0;
+            font-size: 1.05rem;
+        }
+
+        .reader-body h2 {
+            font-family: Georgia, serif;
+            margin-top: 30px;
+        }
+
+        /* ===== MOBILE ===== */
+
+        @media (max-width: 800px) {
+            .grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .menu-button {
+                display: inline-block;
+            }
+
+            .navbar {
+                flex-wrap: wrap;
+                padding: 14px 0;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 0;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .button.secondary {
+                margin: 12px 0 0;
+            }
+
+            .section {
+                padding: 45px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <header>
+        <div class="container navbar">
+
+            <a href="#home" class="logo">The Knowledge Journal.</a>
+
+            <button
+                class="menu-button"
+                id="menu-button"
+                aria-expanded="false"
+                aria-controls="nav-links">
+                Menu ☰
+            </button>
+
+            <nav>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#blog">Writer's Blog</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li>
+                        <button
+                            class="theme-button"
+                            id="theme-button"
+                            aria-label="Toggle dark mode">
+                            🌙
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+    <main>
+
+        <!-- HOME -->
+
+        <section class="hero" id="home">
+            <div class="container hero-content">
+
+                <span class="eyebrow">A space for words and knowledge</span>
+
+                <h1>
+                    Read to Understand.<br>
+                    <span>Learn to Grow.</span>
+                </h1>
+
+                <p>
+                    Welcome to The Knowledge Journal — a place for thoughtful
+                    writing, lifelong learning, educational resources, and
+                    ideas that inspire us to become better human beings.
+                </p>
+
+                <a href="#blog" class="button">Explore Articles</a>
+                <a href="#education" class="button secondary">
+                    Explore Study Notes
+                </a>
+
+                <div class="search-area">
+                    <input
+                        type="search"
+                        id="search"
+                        placeholder="Search articles, subjects, or topics..."
+                        aria-label="Search articles and study notes">
+
+                    <p id="search-message" aria-live="polite">
+                        Explore writing and educational resources.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- WRITER'S BLOG -->
+
+        <section class="section" id="blog">
+            <div class="container">
+
+                <span class="eyebrow">Ideas and reflections</span>
+                <h2 class="section-title">The Writer's Corner</h2>
+
+                <p class="section-description">
+                    Thoughts on life, knowledge, society, and personal growth.
+                </p>
+
+                <div class="grid">
+
+                    <article class="card searchable"
+                             data-category="writing life reflection">
+
+                        <span class="card-category">Life & Reflection</span>
+
+                        <h3>The Importance of Understanding</h3>
+
+                        <p>
+                            Reading gives us information, but understanding
+                            helps us turn that information into wisdom.
+                        </p>
+
+                        <button class="read-more"
+                                data-article="understanding">
+                            Read article →
+                        </button>
+                    </article>
+
+                    <article class="card searchable"
+                             data-category="writing gratitude parents life">
+
+                        <span class="card-category">Gratitude</span>
+
+                        <h3>The Wealth That Money Cannot Buy</h3>
+
+                        <p>
+                            A reflection on family, gratitude, and the
+                            priceless value of the people who stand beside us.
+                        </p>
+
+                        <button class="read-more"
+                                data-article="gratitude">
+                            Read article →
+                        </button>
+                    </article>
+
+                    <article class="card searchable"
+                             data-category="writing knowledge quotes">
+
+                        <span class="card-category">Original Thought</span>
+
+                        <h3>Knowledge and Wisdom</h3>
+
+                        <p>
+                            Explore the difference between collecting
+                            information and genuinely understanding it.
+                        </p>
+
+                        <button class="read-more"
+                                data-article="wisdom">
+                            Read article →
+                        </button>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- QUOTE -->
+
+        <section class="section quote-section">
+            <div class="container">
+
+                <blockquote>
+                    "Knowledge is gained not by reading books, but by
+                    understanding what is written in them."
+
+                    <span class="quote-author">
+                        — A thought worth remembering
+                    </span>
+                </blockquote>
+
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+
+        <section class="section" id="education">
+            <div class="container">
+
+                <span class="eyebrow">Learn something new</span>
+                <h2 class="section-title">Educational Hub</h2>
+
+                <p class="section-description">
+                    Study resources and revision topics for competitive
+                    examinations, including MCS and MPSC.
+                </p>
+
+                <div class="grid">
+
+                    <article class="card searchable"
+                             data-category="education polity constitution mcs mpsc">
+
+                        <span class="card-category">Indian Polity</span>
+
+                        <h3>The Indian Constitution</h3>
+
+                        <p>
+                            Start learning about the Constitution, Fundamental
+                            Rights, Directive Principles, and constitutional
+                            institutions.
+                        </p>
+
+                        <button class="read-more"
+                                data-article="polity">
+                            Start learning →
+                        </button>
+                    </article>
+
+                    <article class="card searchable"
+                             data-category="education history india modern ancient">
+
+                        <span class="card-category">History</span>
+
+                        <h3>History of India</h3>
+
+                        <p>
+                            Explore ancient, medieval, and modern Indian
+                            history through structured revision topics.
+                        </p>
+
+                        <button class="read-more"
+                                data-article="history">
+                            Start learning →
+                        </button>
+                    </article>
+
+                    <article class="card searchable"
+                             data-category="education geography india">
+
+                        <span class="card-category">Geography</span>
+
+                        <h3>Geography of India</h3>
+
+                        <p>
+                            Learn about India's physical features, climate,
+                            rivers, resources, agriculture, and population.
+                        </p>
+
+                        <button class="read-more"
+                                data-article="geography">
+                            Start learning →
+                        </button>
+                    </article>
+
+                    <article class="card searchable"
+                             data-category="education meghalaya gk garo history culture">
+
+                        <span class="card-category">Meghalaya GK</span>
+
+                        <h3>Know Your Meghalaya</h3>
+
+                        <p>
+                            Study Meghalaya's geography, history, culture,
+                            governance, economy, and society.
+                        </p>
+
+                        <button class="read-more"
+                                data-article="meghalaya">
+                            Start learning →
+                        </button>
+                    </article>
+
+                    <article class="card searchable"
+                             data-category="education current affairs news india">
+
+                        <span class="card-category">Current Affairs</span>
+
+                        <h3>Current Affairs & General Knowledge</h3>
+
+                        <p>
+                            Build a foundation for current-affairs revision
+                            and general knowledge examinations.
+                        </p>
+
+                        <button class="read-more"
+                                data-article="current">
+                            Start learning →
+                        </button>
+                    </article>
+
+                    <article class="card searchable"
+                             data-category="education mcs mpsc examination preparation">
+
+                        <span class="card-category">Exam Preparation</span>
+
+                        <h3>MCS & MPSC Preparation</h3>
+
+                        <p>
+                            Organise your syllabus, revision notes, practice
+                            questions, and examination preparation.
+                        </p>
+
+                        <button class="read-more"
+                                data-article="exams">
+                            Start learning →
+                        </button>
+                    </article>
+
+                </div>
+
+                <p class="empty-mess
